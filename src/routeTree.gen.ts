@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PracticeAreasRouteImport } from './routes/practice-areas'
 import { Route as LegalServicesRouteImport } from './routes/legal-services'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as BookConsultationRouteImport } from './routes/book-consultation'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
@@ -22,6 +25,21 @@ const PracticeAreasRoute = PracticeAreasRouteImport.update({
 const LegalServicesRoute = LegalServicesRouteImport.update({
   id: '/legal-services',
   path: '/legal-services',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookConsultationRoute = BookConsultationRouteImport.update({
+  id: '/book-consultation',
+  path: '/book-consultation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -38,12 +56,18 @@ const IndexRoute = IndexRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/blog': typeof BlogRoute
+  '/book-consultation': typeof BookConsultationRoute
+  '/contact': typeof ContactRoute
   '/legal-services': typeof LegalServicesRoute
   '/practice-areas': typeof PracticeAreasRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/blog': typeof BlogRoute
+  '/book-consultation': typeof BookConsultationRoute
+  '/contact': typeof ContactRoute
   '/legal-services': typeof LegalServicesRoute
   '/practice-areas': typeof PracticeAreasRoute
 }
@@ -51,20 +75,48 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/blog': typeof BlogRoute
+  '/book-consultation': typeof BookConsultationRoute
+  '/contact': typeof ContactRoute
   '/legal-services': typeof LegalServicesRoute
   '/practice-areas': typeof PracticeAreasRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/legal-services' | '/practice-areas'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/blog'
+    | '/book-consultation'
+    | '/contact'
+    | '/legal-services'
+    | '/practice-areas'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/legal-services' | '/practice-areas'
-  id: '__root__' | '/' | '/about' | '/legal-services' | '/practice-areas'
+  to:
+    | '/'
+    | '/about'
+    | '/blog'
+    | '/book-consultation'
+    | '/contact'
+    | '/legal-services'
+    | '/practice-areas'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/blog'
+    | '/book-consultation'
+    | '/contact'
+    | '/legal-services'
+    | '/practice-areas'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BlogRoute: typeof BlogRoute
+  BookConsultationRoute: typeof BookConsultationRoute
+  ContactRoute: typeof ContactRoute
   LegalServicesRoute: typeof LegalServicesRoute
   PracticeAreasRoute: typeof PracticeAreasRoute
 }
@@ -83,6 +135,27 @@ declare module '@tanstack/react-router' {
       path: '/legal-services'
       fullPath: '/legal-services'
       preLoaderRoute: typeof LegalServicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/book-consultation': {
+      id: '/book-consultation'
+      path: '/book-consultation'
+      fullPath: '/book-consultation'
+      preLoaderRoute: typeof BookConsultationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -105,6 +178,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BlogRoute: BlogRoute,
+  BookConsultationRoute: BookConsultationRoute,
+  ContactRoute: ContactRoute,
   LegalServicesRoute: LegalServicesRoute,
   PracticeAreasRoute: PracticeAreasRoute,
 }
