@@ -72,19 +72,41 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "JVK Law Firm — Adv. J. Vinay Kumar | Advocate in Visakhapatnam" },
+      { name: "description", content: "Trusted legal solutions by Adv. J. Vinay Kumar across civil, criminal, banking, property, family, arbitration and High Court matters in Visakhapatnam." },
+      { name: "author", content: "JVK Law Firm" },
+      { property: "og:title", content: "JVK Law Firm — Adv. J. Vinay Kumar" },
+      { property: "og:description", content: "Professional Legal Solutions | Trusted Representation | Practical Advice" },
       { property: "og:type", content: "website" },
+      { property: "og:site_name", content: "JVK Law Firm" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
         rel: "stylesheet",
         href: appCss,
+      },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LegalService",
+          name: "JVK Law Firm",
+          description: "Advocate & Legal Consultant in Visakhapatnam providing civil, criminal, banking, family, property, arbitration and High Court litigation services.",
+          telephone: "+919100627656",
+          email: "jvkadvocatevsp@gmail.com",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "D.No. 28-2-59, Yellamma Thota Street, Beside Tummidi Brothers Showroom, Jagadamba Junction",
+            addressLocality: "Visakhapatnam",
+            postalCode: "530020",
+            addressCountry: "IN",
+          },
+          openingHours: "Mo-Sa 09:00-21:00",
+          founder: { "@type": "Person", name: "J. Vinay Kumar", jobTitle: "Advocate" },
+        }),
       },
     ],
   }),
@@ -113,8 +135,14 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <div className="min-h-screen flex flex-col bg-background">
+        <Header />
+        <main className="flex-1 pt-20">
+          <Outlet />
+        </main>
+        <Footer />
+        <WhatsAppFloat />
+      </div>
     </QueryClientProvider>
   );
 }
